@@ -16,11 +16,11 @@ class Client extends Model implements Transformable
         'address'.
         'city',
         'state',
-        'zicode'
+        'zipcode'
     ];
 
     public function user(){
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
 }
