@@ -15,8 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix'=>'admin', 'as' => 'admin.'],function(){
-//Route::group(['prefix'=>'admin','middleware' => 'auth.checkrole', 'as' => 'admin.'],function(){
+//Route::group(['prefix'=>'admin', 'as' => 'admin.'],function(){
+Route::group(['prefix'=>'admin','middleware' => 'auth.checkrole', 'as' => 'admin.'],function(){
     Route::get('categories', ['as'=> 'categories.index', 'uses' => 'CategoriesController@index']);
     Route::get('categories/create', ['as'=> 'categories.create', 'uses' => 'CategoriesController@create']);
     Route::post('categories/store', ['as'=> 'categories.store', 'uses' => 'CategoriesController@store']);
@@ -35,4 +35,8 @@ Route::group(['prefix'=>'admin', 'as' => 'admin.'],function(){
     Route::post('clients/store', ['as'=> 'clients.store', 'uses' => 'ClientsController@store']);
     Route::get('clients/edit/{id}', ['as'=> 'clients.edit', 'uses' => 'ClientsController@edit']);
     Route::post('clients/update/{id}', ['as'=> 'clients.update', 'uses' => 'ClientsController@update']);
+
+    Route::get('orders', ['as'=> 'orders.index', 'uses' => 'OrdersController@index']);
+    Route::get('orders/{id}', ['as'=> 'orders.edit', 'uses' => 'OrdersController@edit']);
+    Route::post('orders/update/{id}', ['as'=> 'orders.update', 'uses' => 'OrdersController@update']);
 });
