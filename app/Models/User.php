@@ -12,15 +12,18 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements Transformable,AuthenticatableContract,AuthorizableContract,CanResetPasswordContract
+class User extends Model implements Transformable,
+    AuthenticatableContract,
+    AuthorizableContract,
+    CanResetPasswordContract
 {
-    use TransformableTrait;
-    use Authenticatable, Authorizable, CanResetPassword;
+    use Authenticatable, Authorizable, CanResetPassword, TransformableTrait;
 
-
-    public function client(){
+    public function client()
+    {
         return $this->hasOne(Client::class);
     }
+
     /**
      * The database table used by the model.
      *
@@ -41,5 +44,4 @@ class User extends Model implements Transformable,AuthenticatableContract,Author
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
-
 }
