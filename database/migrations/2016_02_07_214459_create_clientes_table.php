@@ -23,6 +23,7 @@ class CreateClientesTable extends Migration
             $table->string('zipcode');
             $table->timestamps();
         });
+
     }
 
     /**

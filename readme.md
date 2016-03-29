@@ -4,3 +4,5 @@ Problemas:
 
 ####Create e Edit Clients
 Editar cliente não traz nome e email
+
+####Register
