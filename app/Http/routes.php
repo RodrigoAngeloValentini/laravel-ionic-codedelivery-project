@@ -1,42 +1,58 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
-
-//Route::group(['prefix'=>'admin', 'as' => 'admin.'],function(){
-Route::group(['prefix'=>'admin','middleware' => 'auth.checkrole', 'as' => 'admin.'],function(){
-    Route::get('categories', ['as'=> 'categories.index', 'uses' => 'CategoriesController@index']);
-    Route::get('categories/create', ['as'=> 'categories.create', 'uses' => 'CategoriesController@create']);
-    Route::post('categories/store', ['as'=> 'categories.store', 'uses' => 'CategoriesController@store']);
-    Route::get('categories/edit/{id}', ['as'=> 'categories.edit', 'uses' => 'CategoriesController@edit']);
-    Route::post('categories/update/{id}', ['as'=> 'categories.update', 'uses' => 'CategoriesController@update']);
-
-    Route::get('products', ['as'=> 'products.index', 'uses' => 'ProductsController@index']);
-    Route::get('products/create', ['as'=> 'products.create', 'uses' => 'ProductsController@create']);
-    Route::post('products/store', ['as'=> 'products.store', 'uses' => 'ProductsController@store']);
-    Route::get('products/edit/{id}', ['as'=> 'products.edit', 'uses' => 'ProductsController@edit']);
-    Route::post('products/update/{id}', ['as'=> 'products.update', 'uses' => 'ProductsController@update']);
-    Route::get('products/destroy/{id}', ['as'=> 'products.destroy', 'uses' => 'ProductsController@destroy']);
-
-    Route::get('clients', ['as'=> 'clients.index', 'uses' => 'ClientsController@index']);
-    Route::get('clients/create', ['as'=> 'clients.create', 'uses' => 'ClientsController@create']);
-    Route::post('clients/store', ['as'=> 'clients.store', 'uses' => 'ClientsController@store']);
-    Route::get('clients/edit/{id}', ['as'=> 'clients.edit', 'uses' => 'ClientsController@edit']);
-    Route::post('clients/update/{id}', ['as'=> 'clients.update', 'uses' => 'ClientsController@update']);
-
-    Route::get('orders', ['as'=> 'orders.index', 'uses' => 'OrdersController@index']);
-    Route::get('orders/{id}', ['as'=> 'orders.edit', 'uses' => 'OrdersController@edit']);
-    Route::post('orders/update/{id}', ['as'=> 'orders.update', 'uses' => 'OrdersController@update']);
+Route::get('/home', function () {
+    return view('welcome');
 });
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth.checkrole:admin', 'as' => 'admin.'], function(){
+    Route::group(['prefix' => 'categories', 'as' => 'categories.'], function(){
+        Route::get('/',['uses' => 'CategoriesController@index', 'as' => 'index']);
+        Route::get('/create', ['uses' => 'CategoriesController@create', 'as' => 'create']);
+        Route::post('/store', ['uses' => 'CategoriesController@store', 'as' => 'store']);
+        Route::get('/edit/{id}', ['uses' => 'CategoriesController@edit', 'as' => 'edit']);
+        Route::post('/update/{id}', ['uses' => 'CategoriesController@update', 'as' => 'update']);
+    });
+
+    Route::group(['prefix' => 'products', 'as' => 'products.'], function(){
+        Route::get('/',['uses' => 'ProductsController@index', 'as' => 'index']);
+        Route::get('/create', ['uses' => 'ProductsController@create', 'as' => 'create']);
+        Route::post('/store', ['uses' => 'ProductsController@store', 'as' => 'store']);
+        Route::get('/edit/{id}', ['uses' => 'ProductsController@edit', 'as' => 'edit']);
+        Route::post('/update/{id}', ['uses' => 'ProductsController@update', 'as' => 'update']);
+        Route::get('/destroy/{id}', ['uses' => 'ProductsController@destroy', 'as' => 'destroy']);
+    });
+
+    Route::group(['prefix' => 'clients', 'as' => 'clients.'], function(){
+        Route::get('/',['uses' => 'ClientsController@index', 'as' => 'index']);
+        Route::get('/create', ['uses' => 'ClientsController@create', 'as' => 'create']);
+        Route::post('/store', ['uses' => 'ClientsController@store', 'as' => 'store']);
+        Route::get('/edit/{id}', ['uses' => 'ClientsController@edit', 'as' => 'edit']);
+        Route::post('/update/{id}', ['uses' => 'ClientsController@update', 'as' => 'update']);
+        Route::get('/destroy/{id}', ['uses' => 'ClientsController@destroy', 'as' => 'destroy']);
+    });
+
+    Route::group(['prefix' => 'orders', 'as' => 'orders.'], function(){
+        Route::get('/',['uses' => 'OrdersController@index', 'as' => 'index']);
+        Route::get('/edit/{id}',['uses' => 'OrdersController@edit', 'as' => 'edit']);
+        Route::post('/update/{id}',['uses' => 'OrdersController@update', 'as' => 'update']);
+    });
+
+    Route::group(['prefix' => 'cupoms', 'as' => 'cupoms.'], function(){
+        Route::get('/',['uses' => 'CupomsController@index', 'as' => 'index']);
+        Route::get('/create', ['uses' => 'CupomsController@create', 'as' => 'create']);
+        Route::post('/store', ['uses' => 'CupomsController@store', 'as' => 'store']);
+        Route::get('/edit/{id}', ['uses' => 'CupomsController@edit', 'as' => 'edit']);
+        Route::post('/update/{id}', ['uses' => 'CupomsController@update', 'as' => 'update']);
+        Route::get('/destroy/{id}', ['uses' => 'CupomsController@destroy', 'as' => 'destroy']);
+    });
+});
+
+Route::group(['prefix' => 'customer', 'as' => 'customer.','middleware' => 'auth.checkrole:client'], function(){
+    Route::get('order', ['as' => 'order.index', 'uses' => 'CheckoutController@index']);
+    Route::get('order/create', ['as' => 'order.create', 'uses' => 'CheckoutController@create']);
+    Route::post('order/store', ['as' => 'order.store', 'uses' => 'CheckoutController@store']);
+});
+
