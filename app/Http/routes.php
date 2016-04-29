@@ -69,4 +69,11 @@ Route::group(['prefix' => 'api', 'middleware' => 'oauth' , 'as' => 'api.'], func
             'total' => 10
         ];
     });
+    Route::get('teste',function(){
+        return [
+            'id' => 1,
+            'client' => 'Rodrigo',
+            'total' => 10
+        ];
+    });
 });
