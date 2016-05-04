@@ -62,18 +62,20 @@ Route::post('oauth/access_token', function() {
 
 Route::group(['prefix' => 'api', 'middleware' => 'oauth' , 'as' => 'api.'], function()
 {
-    Route::get('pedidos',function(){
-        return [
-            'id' => 1,
-            'client' => 'Rodrigo',
-            'total' => 10
-        ];
+    Route::group(['prefix'=>'client',  'middleware'=>'oauth.CheckRole:client','as'=>'client.'],function() {
+        Route::resource('order',
+            'Api\Client\ClientCheckoutController',[
+                'except' => ['create', 'edit'],
+            ]);
+        Route::get('products','Api\Client\ClientProductController@index');
     });
-    Route::get('teste',function(){
-        return [
-            'id' => 1,
-            'client' => 'Rodrigo',
-            'total' => 10
-        ];
+    Route::group(['prefix'=>'deliveryman', 'middleware'=>'oauth.CheckRole:deliveryman', 'as'=>'deliveryman.'],function() {
+        Route::get('pedidos',function(){
+            return [
+                'id' => 1,
+                'client' => 'Rodrigo - Entregador',
+                'total' => 10
+            ];
+        });
     });
 });
