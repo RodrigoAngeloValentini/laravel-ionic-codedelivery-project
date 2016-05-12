@@ -1,18 +1,19 @@
 <?php
 
-namespace CodeDelivery\Repositories;
+namespace Delivery\Repositories;
 
+use Delivery\Presenters\UserPresenter;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use CodeDelivery\Repositories\UserRepository;
-use CodeDelivery\Models\User;
+use Delivery\Models\User;
 
 /**
  * Class UserRepositoryEloquent
- * @package namespace CodeDelivery\Repositories;
+ * @package namespace Delivery\Repositories;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *
@@ -23,10 +24,6 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         return User::class;
     }
 
-    public function getDeliverymen(){
-        return $this->model->where(['role'=>'deliveryman'])->lists('name','id');
-    }
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -34,4 +31,28 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function lists()
+    {
+        return $this->model->lists('name','id');
+    }
+
+    public function notClients(ClientRepository $clientRepository){
+
+        $clients = $clientRepository->lists();
+
+        $users = $this->model->whereNotIn('id', $clients)->get(['id','name']);
+        $lista = [];
+
+        foreach ($users as $user){
+            $lista[$user->id] = $user->name;
+        }
+        return $lista;
+
+    }
+    public function presenter()
+    {
+        return UserPresenter::class;
+    }
+
 }

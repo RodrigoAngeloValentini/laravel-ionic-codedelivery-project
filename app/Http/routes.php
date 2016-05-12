@@ -74,12 +74,13 @@ Route::group(['prefix' => 'api', 'middleware' => 'oauth' , 'as' => 'api.'], func
         Route::get('products','Api\Client\ClientProductController@index');
     });
     Route::group(['prefix'=>'deliveryman', 'middleware'=>'oauth.CheckRole:deliveryman', 'as'=>'deliveryman.'],function() {
-        Route::get('pedidos',function(){
-            return [
-                'id' => 1,
-                'client' => 'Rodrigo - Entregador',
-                'total' => 10
-            ];
-        });
+        Route::resource('order',
+            'Api\Deliveryman\DeliverymanCheckoutController',[
+                'except' => ['create', 'edit', 'destroy','store'],
+            ]);
+        Route::patch('order/{id}/update-status',[
+            'uses'=> 'Api\Deliveryman\DeliverymanCheckoutController@updateStatus',
+            'as' => 'order.update_status',
+        ]);
     });
 });

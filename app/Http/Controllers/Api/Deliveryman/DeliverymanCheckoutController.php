@@ -1,15 +1,14 @@
 <?php
-namespace CodeDelivery\Http\Controllers\Api\Client;
+namespace CodeDelivery\Http\Controllers\Api\Deliveryman;
 
 use CodeDelivery\Http\Controllers\Controller;
 use CodeDelivery\Repositories\OrderRepository;
-use CodeDelivery\Repositories\ProductRepository;
 use CodeDelivery\Repositories\UserRepository;
 use CodeDelivery\Services\OrderService;
-use CodeDelivery\Http\Requests\CheckoutRequest as Request;
+use Illuminate\Http\Request;
 use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
-class ClientCheckoutController extends Controller
+class DeliverymanCheckoutController extends Controller
 {
     /**
      * @var OrderRepository
@@ -20,14 +19,9 @@ class ClientCheckoutController extends Controller
      */
     private $userRepository;
     /**
-     * @var ProductRepository
-     */
-    private $productRepository;
-    /**
      * @var OrderService
      */
     private $orderService;
-
     private $whith = ['client','cupom','items'];
     /**
      * CheckoutController constructor.
@@ -38,45 +32,37 @@ class ClientCheckoutController extends Controller
     public function __construct(
         OrderRepository $orderRepository,
         UserRepository $userRepository,
-        ProductRepository $productRepository,
         OrderService $orderService
     )
     {
         $this->orderRepository = $orderRepository;
         $this->userRepository = $userRepository;
-        $this->productRepository = $productRepository;
         $this->orderService = $orderService;
     }
-
     public function index()
     {
         $id = Authorizer::getResourceOwnerId();
-        $clientId = $this->userRepository->find($id)->client->id;
-        $orders = $this->orderRepository->
-        skipPresenter(false)->with($this->whith)->scopeQuery(function($query) use ($clientId){
-            return $query->where('client_id','=',$clientId);
-        })->paginate(5);
+        $orders = $this->orderRepository
+            ->skipPresenter(false)
+            ->with($this->whith)->scopeQuery(function($query) use ($id){
+                return $query->where('user_deliveryman_id','=',$id);
+            })->paginate(5);
         return $orders;
     }
-
-    public function store(Request $request)
-    {
-        $id = Authorizer::getResourceOwnerId();
-        $data = $request->all();
-        $clientId = $this->userRepository->find($id)->client->id;
-        $data['client_id'] = $clientId;
-        $o = $this->orderService->create($data);
-        return $this->orderRepository
-            ->with($this->whith)
-            ->find($o->id);
-    }
-
     public function show($id)
     {
-        $idUser = Authorizer::getResourceOwnerId();
+        $id_deliveryman = Authorizer::getResourceOwnerId();
         return $this->orderRepository
             ->skipPresenter(false)
-            ->with($this->whith)
-            ->findWhere(['client_id'=>$idUser,'id'=>$id]);
+            ->getByIdAndDeliveryman($id, $id_deliveryman);
+    }
+    public function updateStatus(Request $request, $id)
+    {
+        $id_deliveryman = Authorizer::getResourceOwnerId();
+        $order = $this->orderService->updateStatus($id, $id_deliveryman, $request->get('status'));
+        if($order){
+            return $this->orderRepository->find($order->id);
+        }
+        abort(400, 'Order não encontrada');
     }
 }

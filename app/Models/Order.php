@@ -18,13 +18,13 @@ class Order extends Model implements Transformable
         'cupom_id'
     ];
 
-    /*public function transform()
+    public function transform()
     {
         return [
             'order' => $this->id,
             'items' => $this->items
         ];
-    }*/
+    }
 
     public function client()
     {

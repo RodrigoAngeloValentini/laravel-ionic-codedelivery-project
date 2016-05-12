@@ -21,8 +21,15 @@ class AdminClientRequest extends Request
      *
      * @return array
      */
+
     public function rules()
     {
-        return [];
+        return [
+            'phone' => 'required|min:8|max:50',
+            'address'=>'required|min:5',
+            'city'=>'required',
+            'state'=>'required',
+            'zipcode'=>'required',
+        ];
     }
 }
