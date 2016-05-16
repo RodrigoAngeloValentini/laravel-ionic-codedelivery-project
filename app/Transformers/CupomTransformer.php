@@ -1,13 +1,13 @@
 <?php
 
-namespace Delivery\Transformers;
+namespace CodeDelivery\Transformers;
 
 use League\Fractal\TransformerAbstract;
-use Delivery\Models\Cupom;
+use CodeDelivery\Models\Cupom;
 
 /**
  * Class CupomTransformer
- * @package namespace Delivery\Transformers;
+ * @package namespace CodeDelivery\Transformers;
  */
 class CupomTransformer extends TransformerAbstract
 {

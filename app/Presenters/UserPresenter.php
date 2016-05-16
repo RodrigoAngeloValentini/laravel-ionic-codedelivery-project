@@ -1,14 +1,14 @@
 <?php
 
-namespace Delivery\Presenters;
+namespace CodeDelivery\Presenters;
 
-use Delivery\Transformers\UserTransformer;
+use CodeDelivery\Transformers\UserTransformer;
 use Prettus\Repository\Presenter\FractalPresenter;
 
 /**
  * Class UserPresenter
  *
- * @package namespace Delivery\Presenters;
+ * @package namespace CodeDelivery\Presenters;
  */
 class UserPresenter extends FractalPresenter
 {

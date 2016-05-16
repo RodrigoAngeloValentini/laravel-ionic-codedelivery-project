@@ -1,13 +1,13 @@
 <?php
 
-namespace Delivery\Transformers;
+namespace CodeDelivery\Transformers;
 
 use League\Fractal\TransformerAbstract;
-use Delivery\Models\Product;
+use CodeDelivery\Models\Product;
 
 /**
  * Class ProductTransformer
- * @package namespace Delivery\Transformers;
+ * @package namespace CodeDelivery\Transformers;
  */
 class ProductTransformer extends TransformerAbstract
 {

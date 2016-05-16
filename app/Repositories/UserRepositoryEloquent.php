@@ -1,6 +1,6 @@
 <?php
 
-namespace Delivery\Repositories;
+namespace CodeDelivery\Repositories;
 
 use Delivery\Presenters\UserPresenter;
 use Prettus\Repository\Eloquent\BaseRepository;
@@ -9,7 +9,7 @@ use Delivery\Models\User;
 
 /**
  * Class UserRepositoryEloquent
- * @package namespace Delivery\Repositories;
+ * @package namespace CodeDelivery\Repositories;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
