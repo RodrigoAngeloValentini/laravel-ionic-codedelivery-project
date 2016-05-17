@@ -2,10 +2,10 @@
 
 namespace CodeDelivery\Repositories;
 
-use Delivery\Presenters\UserPresenter;
+use CodeDelivery\Presenters\UserPresenter;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Delivery\Models\User;
+use CodeDelivery\Models\User;
 
 /**
  * Class UserRepositoryEloquent
