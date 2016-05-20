@@ -1,4 +1,33 @@
 <?php
+Route::group(['middleware'=>'cors'],function(){
+    Route::post('oauth/access_token', function() {
+        return Response::json(Authorizer::issueAccessToken());
+    });
+    Route::group(['prefix' => 'api', 'middleware' => 'oauth' , 'as' => 'api.'], function()
+    {
+        Route::get('authenticated',function(\CodeDelivery\Repositories\UserRepository $userRepository){
+            $id = Authorizer::getResourceOwnerId();
+            return $userRepository->skipPresenter(false)->find($id);
+        });
+        Route::group(['prefix'=>'client',  'middleware'=>'oauth.CheckRole:client','as'=>'client.'],function() {
+            Route::resource('order',
+                'Api\Client\ClientCheckoutController',[
+                    'except' => ['create', 'edit'],
+                ]);
+            Route::get('products','Api\Client\ClientProductController@index');
+        });
+        Route::group(['prefix'=>'deliveryman', 'middleware'=>'oauth.CheckRole:deliveryman', 'as'=>'deliveryman.'],function() {
+            Route::resource('order',
+                'Api\Deliveryman\DeliverymanCheckoutController',[
+                    'except' => ['create', 'edit', 'destroy','store'],
+                ]);
+            Route::patch('order/{id}/update-status',[
+                'uses'=> 'Api\Deliveryman\DeliverymanCheckoutController@updateStatus',
+                'as' => 'order.update_status',
+            ]);
+        });
+    });
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -54,33 +83,4 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.','middleware' => 'auth.
     Route::get('order', ['as' => 'order.index', 'uses' => 'CheckoutController@index']);
     Route::get('order/create', ['as' => 'order.create', 'uses' => 'CheckoutController@create']);
     Route::post('order/store', ['as' => 'order.store', 'uses' => 'CheckoutController@store']);
-});
-
-Route::post('oauth/access_token', function() {
-    return Response::json(Authorizer::issueAccessToken());
-});
-
-Route::group(['prefix' => 'api', 'middleware' => 'oauth' , 'as' => 'api.'], function()
-{
-    Route::get('authenticated',function(\CodeDelivery\Repositories\UserRepository $userRepository){
-        $id = Authorizer::getResourceOwnerId();
-        return $userRepository->skipPresenter(false)->find($id);
-    });
-    Route::group(['prefix'=>'client',  'middleware'=>'oauth.CheckRole:client','as'=>'client.'],function() {
-        Route::resource('order',
-            'Api\Client\ClientCheckoutController',[
-                'except' => ['create', 'edit'],
-            ]);
-        Route::get('products','Api\Client\ClientProductController@index');
-    });
-    Route::group(['prefix'=>'deliveryman', 'middleware'=>'oauth.CheckRole:deliveryman', 'as'=>'deliveryman.'],function() {
-        Route::resource('order',
-            'Api\Deliveryman\DeliverymanCheckoutController',[
-                'except' => ['create', 'edit', 'destroy','store'],
-            ]);
-        Route::patch('order/{id}/update-status',[
-            'uses'=> 'Api\Deliveryman\DeliverymanCheckoutController@updateStatus',
-            'as' => 'order.update_status',
-        ]);
-    });
 });
