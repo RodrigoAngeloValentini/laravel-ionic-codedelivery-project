@@ -1,5 +1,6 @@
 <?php
-namespace Delivery\Repositories;
+namespace CodeDelivery\Repositories;
+
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use CodeDelivery\Models\Product;

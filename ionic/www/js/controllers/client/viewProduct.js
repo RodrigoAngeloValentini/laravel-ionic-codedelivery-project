@@ -4,7 +4,7 @@ angular.module('starter.controllers')
 
             $scope.products = [];
             $ionicLoading.show({
-               template:'Carregando...'
+                template:'Carregando...'
             });
 
             Product.query({},function(data){
