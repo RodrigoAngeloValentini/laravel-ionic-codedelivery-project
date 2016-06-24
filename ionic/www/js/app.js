@@ -67,6 +67,7 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
             template: '<ui-view/>'
         })
         .state('client.checkout', {
+            cache:false,
             url: '/checkout',
             templateUrl: 'templates/client/checkout.html',
             controller: 'ClientCheckoutCtrl',
@@ -76,6 +77,11 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
             templateUrl: 'templates/client/checkout_item_detail.html',
             controller: 'ClientCheckoutDetailCtrl',
         })
+        .state('client.checkout_successful',{
+            url:'/checkout/successful',
+            templateUrl:'templates/client/chekout_successful.html',
+            controller:'ClientCheckoutSuccessful'
+        })
         .state('client.view_products', {
             url: '/view_products',
             templateUrl: 'templates/client/view_products.html',
@@ -83,3 +89,5 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
         })
 
 });
+
+
