@@ -20,11 +20,6 @@ angular.module('starter.controllers')
             });
 
             $scope.addItem = function(item){
-                cart.items.push(item);
-                $state.go('client.checkout');
-            };
-
-            $scope.addItem = function(item){
                 item.qtd = 1;
                 $cart.addItem(item);
                 $state.go('client.checkout');

@@ -35,10 +35,10 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
 
     OAuthProvider.configure({
         baseUrl: appConfig.baseUrl,
-        rantType: 'password',
+        //rantType: 'password',
         clientId: 'appid01',
         clientSecret: 'secret', // optional
-        grantPath:'oauth/access_token'
+        grantPath:'/oauth/access_token'
     });
 
     OAuthTokenProvider.configure({
@@ -64,7 +64,7 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
         .state('client', {
             abstract: true,
             url: '/client',
-            template: '<ui-view/>'
+            template: '<ion-nav-view/>'
         })
         .state('client.checkout', {
             cache:false,
@@ -79,7 +79,7 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
         })
         .state('client.checkout_successful',{
             url:'/checkout/successful',
-            templateUrl:'templates/client/chekout_successful.html',
+            templateUrl:'templates/client/checkout_successful.html',
             controller:'ClientCheckoutSuccessful'
         })
         .state('client.view_products', {
@@ -88,6 +88,8 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
             controller: 'ClientViewProductCtrl',
         })
 
+})
+
+.service('cart', function() {
+    this.items = [];
 });
-
-

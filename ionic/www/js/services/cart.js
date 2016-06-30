@@ -2,37 +2,39 @@ angular.module('starter.services')
     .service('$cart',['$localStorage',function($localStorage){
         var key = 'cart',cartAux = $localStorage.getObject(key);
 
-        if(!cartAux){
+        if (!cartAux) {
             initCart();
         }
-        this.clear = function(){
+
+        this.clean = function () {
             initCart();
         };
-        this.get = function(){
+
+        this.get = function () {
             return $localStorage.getObject(key);
         };
 
-        this.getItem = function(i){
+        this.getItem = function (i) {
             return this.get().items[i];
         };
 
-        this.addItem = function(item){
-            var cart = this.get(),itemAux,exists=false;
-            for(var index in cart.items){
+        this.addItem = function (item) {
+            var cart = this.get(), itemAux, exists = false;
+            for (var index in cart.items) {
                 itemAux = cart.items[index];
-                if(itemAux.id == item.id){
+                if (itemAux.id == item.id) {
                     itemAux.qtd = item.qtd + itemAux.qtd;
                     itemAux.subtotal = calculateSubTotal(itemAux);
                     exists = true;
                     break;
                 }
             }
-            if(!exists){
+            if (!exists) {
                 item.subtotal = calculateSubTotal(item);
                 cart.items.push(item);
             }
             cart.total = getTotal(cart.items);
-            $localStorage.setObject(key,cart);
+            $localStorage.setObject(key, cart);
         };
 
         this.removeItem = function(i){
@@ -42,8 +44,7 @@ angular.module('starter.services')
             $localStorage.setObject(key,cart);
         };
         this.updateQtd = function(i,qtd){
-            var cart = this.get(),
-                itemAux = cart.items[i];
+            var cart = this.get(), itemAux = cart.items[i];
             itemAux.qtd = qtd;
             itemAux.subtotal = calculateSubTotal(itemAux);
             cart.total = getTotal(cart.items);
