@@ -1,6 +1,6 @@
 angular.module('starter.services')
-    .service('$cart',['$localStorage',function($localStorage){
-        var key = 'cart',cartAux = $localStorage.getObject(key);
+    .service('$cart', ['$localStorage', function ($localStorage) {
+        var key = 'cart', cartAux = $localStorage.getObject(key);
 
         if (!cartAux) {
             initCart();
@@ -37,36 +37,67 @@ angular.module('starter.services')
             $localStorage.setObject(key, cart);
         };
 
-        this.removeItem = function(i){
+        this.removeItem = function (i) {
             var cart = this.get();
-            cart.items.splice(i,1);
+            cart.items.splice(i, 1);
             cart.total = getTotal(cart.items);
-            $localStorage.setObject(key,cart);
+            $localStorage.setObject(key, cart);
         };
-        this.updateQtd = function(i,qtd){
+
+        this.updateQtd = function (i, qtd) {
             var cart = this.get(), itemAux = cart.items[i];
             itemAux.qtd = qtd;
             itemAux.subtotal = calculateSubTotal(itemAux);
             cart.total = getTotal(cart.items);
-            $localStorage.setObject(key,cart);
+            $localStorage.setObject(key, cart);
         };
 
-        function calculateSubTotal(item){
+        this.setCupom = function (code, value) {
+            var cart = this.get();
+            cart.cupom = {
+                code: code,
+                value: value
+            };
+
+            $localStorage.setObject(key, cart);
+        };
+
+        this.removeCupom = function () {
+            var cart = this.get();
+            cart.cupom = {
+                code: null,
+                value: null
+            };
+
+            $localStorage.setObject(key, cart);
+        };
+
+        this.getTotalFinal = function() {
+            var cart = this.get();
+            return cart.total - (cart.cupom.value || 0);
+        };
+
+        function calculateSubTotal(item) {
             return item.price * item.qtd;
-        };
+        }
 
-        function getTotal(items){
+        function getTotal(items) {
             var sum = 0;
-            angular.forEach(items,function(item){
-               sum += item.subtotal;
+            angular.forEach(items, function (item) {
+                sum += item.subtotal;
             });
             return sum;
-        };
+        }
 
-        function initCart(){
-            $localStorage.setObject(key,{
+        function initCart() {
+            $localStorage.setObject(key, {
                 items: [],
-                total:0
+                total: 0,
+                cupom: {
+                    code: null,
+                    value: null
+                }
             });
-        };
+        }
+
     }]);

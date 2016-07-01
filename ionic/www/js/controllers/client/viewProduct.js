@@ -1,11 +1,6 @@
 angular.module('starter.controllers')
     .controller('ClientViewProductCtrl',[
-        '$scope','$state','Product','$ionicLoading','$cart','$localStorage',function($scope,$state,Product,$ionicLoading,$cart,$localStorage){
-
-            $localStorage.setObject('cart',{
-                name:'Ionic',
-                version:'1.1.0'
-            });
+        '$scope','$state','Product','$ionicLoading','$cart',function($scope,$state,Product,$ionicLoading,$cart){
 
             $scope.products = [];
             $ionicLoading.show({

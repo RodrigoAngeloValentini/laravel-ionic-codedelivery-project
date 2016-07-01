@@ -11,4 +11,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface CupomRepository extends RepositoryInterface
 {
     //
+    public function findByCode($code);
 }
