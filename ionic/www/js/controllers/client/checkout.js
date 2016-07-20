@@ -30,7 +30,7 @@ angular.module('starter.controllers')
                     template:'Carregando...'
                 });
                 if($scope.cupom.value){
-                    o.cupom.code = $scope.cupom.code;
+                    o.cupom_code = $scope.cupom.code;
                 }
                 Order.save({id: null},o,function(data){
                     $ionicLoading.hide();
@@ -70,9 +70,16 @@ angular.module('starter.controllers')
                 });
 
                 Cupom.get({code: code}, function (data) {
-                    $cart.setCupom(data.data.code, data.data.value);
-                    $scope.cupom = $cart.get().cupom;
-                    $scope.total = $cart.getTotalFinal();
+                    if(data.data.value > $cart.getTotalFinal()){
+                        $ionicPopup.alert({
+                            title: 'Advertência',
+                            template: 'Valor cupom maior que o pedido! Adicione mais items'
+                        });
+                    }else {
+                        $cart.setCupom(data.data.code, data.data.value);
+                        $scope.cupom = $cart.get().cupom;
+                        $scope.total = $cart.getTotalFinal();
+                    }
                     $ionicLoading.hide();
                 }, function (responseError) {
                     $ionicLoading.hide();
