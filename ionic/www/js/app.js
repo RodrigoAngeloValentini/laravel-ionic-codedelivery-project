@@ -4,16 +4,16 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('starter.controllers',[]);
-
 angular.module('starter.services',[]);
+angular.module('starter.filters',[]);
 
-angular.module('starter', ['ionic','starter.controllers','starter.services','angular-oauth2','ngResource','ngCordova'])
+angular.module('starter', ['ionic','starter.controllers','starter.services','starter.filters','angular-oauth2','ngResource','ngCordova'])
 
     .constant('appConfig',{
         //baseUrl:'http://localhost:8000'
         //baseUrl:'http://localhost'
-        //baseUrl:'http://localhost/laravel-codedelivery/public'
-        baseUrl:'http://192.168.0.101'
+        //baseUrl:'http://192.168.25.133:8080'
+        baseUrl:'http://192.168.0.101:8080'
     })
 
     .run(function($ionicPlatform) {
@@ -52,6 +52,13 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
     });
 
     $stateProvider
+        .state('menu',{
+            url:'/menu',
+            templateUrl:'templates/client/menu.html',
+            controller:function($scope){
+
+            }
+        })
         .state('login',{
             url:'/login',
             templateUrl:'templates/login.html',
@@ -67,13 +74,24 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','ang
         .state('client', {
             abstract: true,
             url: '/client',
-            template: '<ion-nav-view/>'
+            templateUrl: 'templates/client/menu.html',
+            controller:'ClientMenuCtrl'
         })
         .state('client.checkout', {
             cache:false,
             url: '/checkout',
             templateUrl: 'templates/client/checkout.html',
             controller: 'ClientCheckoutCtrl'
+        })
+        .state('client.order', {
+            url: '/order',
+            templateUrl: 'templates/client/order.html',
+            controller: 'ClientOrderCtrl'
+        })
+        .state('client.view_order', {
+            url: '/view_order/:id',
+            templateUrl: 'templates/client/view_order.html',
+            controller: 'ClientViewOrderCtrl'
         })
         .state('checkout_item_detail', {
             url: '/checkout/detail/:index',
