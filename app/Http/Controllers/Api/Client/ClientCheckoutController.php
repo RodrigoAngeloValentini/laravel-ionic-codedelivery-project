@@ -77,6 +77,6 @@ class ClientCheckoutController extends Controller
         return $this->orderRepository
             ->skipPresenter(false)
             ->with($this->whith)
-            ->findWhere(['client_id'=>$idUser,'id'=>$id]);
+            ->find($id);
     }
 }

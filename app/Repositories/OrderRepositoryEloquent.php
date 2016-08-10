@@ -16,29 +16,32 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
 
     public function getByIdAndDeliveryman($id, $idDeliveryman)
     {
-        $result = $this->with(['client', 'items', 'cupom'])->findWhere([
-            'id' => $id,
-            'user_deliveryman_id' => $idDeliveryman
-        ]);
-        if($result instanceof Collection){
-            $result = $result->first();
-        }else{
-            if(isset($result['data']) && count($result['data']) == 1){
-                $result = [
-                    'data' => $result['data'][0]
-                ];
-            }else{
-                throw new ModelNotFoundException('Order não existe');
-            }
-        }
-        /*
+        $result = $this->model
+            ->where('id',$id)
+            ->where('user_deliveryman_id',$idDeliveryman)
+            ->first();
+
+//        $result = $this->with(['client', 'items', 'cupom'])->findWhere([
+//            'id' => $id,
+//            'user_deliveryman_id' => $idDeliveryman
+//        ]);
+//        if($result instanceof Collection){
+//            $result = $result->first();
+//        }else{
+//            if(isset($result['data']) && count($result['data']) == 1){
+//                $result = [
+//                    'data' => $result['data'][0]
+//                ];
+//            }else{
+//                throw new ModelNotFoundException('Order não existe');
+//            }
+//        }
+
         if($result){
-            $result->items->each(function($item){
-                $item->product;
-            });
+            return $this->parserResult($result);
         }
-        */
-        return $result;
+        throw (new ModelNotFoundException())->setModel(get_class($this->model));
+
     }
     /**
      * Specify Model class name

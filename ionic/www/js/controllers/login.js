@@ -15,7 +15,7 @@ angular.module('starter.controllers')
                 })
                 .then(function(data){
                     UserData.set(data.data);
-                    $state.go('client.checkout');
+                    $state.go('client.view_products');
                 },function(responseError){
                     UserData.set(null);
                     OAuthToken.removeToken();
