@@ -7,6 +7,10 @@
   "dependencies": {
     "angular-oauth2": "^3.0.1",
     "angular-resource": "^1.5.5",
-    "ngCordova": "^0.1.26-alpha"
+    "ngCordova": "^0.1.26-alpha",
+    "angular-google-maps": "^2.3.3",
+    "lodash": "3.8.0",
+    "pusher-angular": "^0.1.9",
+    "pusher-websocket-iso": "pusher#^3.2.1"
   }
 }

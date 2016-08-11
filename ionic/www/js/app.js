@@ -7,31 +7,34 @@ angular.module('starter.controllers',[]);
 angular.module('starter.services',[]);
 angular.module('starter.filters',[]);
 
-angular.module('starter', ['ionic','starter.controllers','starter.services','starter.filters','angular-oauth2','ngResource','ngCordova'])
+angular.module('starter', ['ionic','starter.controllers','starter.services','starter.filters','angular-oauth2','ngResource','ngCordova','uiGmapgoogle-maps','pusher-angular'])
 
     .constant('appConfig',{
-        baseUrl:'http://localhost:8000'
+        baseUrl:'http://localhost:8000',
+        pusherKey:'3e68dfceea93a4610002'
         //baseUrl:'http://localhost'
         //baseUrl:'http://192.168.25.133:8080'
         //baseUrl:'http://192.168.0.101:8080'
     })
 
-    .run(function($ionicPlatform) {
-      $ionicPlatform.ready(function() {
-        if(window.cordova && window.cordova.plugins.Keyboard) {
-          // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-          // for form inputs)
-          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    .run(function($ionicPlatform,$window,appConfig) {
 
-          // Don't remove this line unless you know what you are doing. It stops the viewport
-          // from snapping when text inputs are focused. Ionic handles this internally for
-          // a much nicer keyboard experience.
-          cordova.plugins.Keyboard.disableScroll(true);
-        }
-        if(window.StatusBar) {
-          StatusBar.styleDefault();
-        }
-      });
+        $window.client = new Pusher(appConfig.pusherKey);
+        $ionicPlatform.ready(function() {
+            if(window.cordova && window.cordova.plugins.Keyboard) {
+                // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+                // for form inputs)
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+
+                // Don't remove this line unless you know what you are doing. It stops the viewport
+                // from snapping when text inputs are focused. Ionic handles this internally for
+                // a much nicer keyboard experience.
+                cordova.plugins.Keyboard.disableScroll(true);
+            }
+            if(window.StatusBar) {
+                StatusBar.styleDefault();
+            }
+        });
 })
 
 .config(function($stateProvider,$urlRouterProvider,OAuthProvider,OAuthTokenProvider,appConfig,$provide){
@@ -93,7 +96,13 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','sta
             templateUrl: 'templates/client/view_order.html',
             controller: 'ClientViewOrderCtrl'
         })
-        .state('checkout_item_detail', {
+        .state('client.view_delivery', {
+            cache:false,
+            url: '/view_delivery/:id',
+            templateUrl: 'templates/client/view_delivery.html',
+            controller: 'ClientViewDeliveryCtrl'
+        })
+        .state('client.checkout_item_detail', {
             url: '/checkout/detail/:index',
             templateUrl: 'templates/client/checkout_item_detail.html',
             controller: 'ClientCheckoutDetailCtrl'
