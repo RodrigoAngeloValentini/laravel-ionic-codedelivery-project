@@ -1,7 +1,7 @@
 angular.module('starter.controllers')
     .controller('DeliverymanViewOrderCtrl',[
         '$scope','$stateParams','DeliveymanOrder','$ionicLoading','$ionicPopup','$cordovaGeolocation',function($scope, $stateParams, DeliveymanOrder, $ionicLoading,$ionicPopup,$cordovaGeolocation){
-            var watch;
+            var watch, lat = null, long = null;
             $scope.order = {};
             $ionicLoading.show({
                 template:'Carregando...'
@@ -33,9 +33,16 @@ angular.module('starter.controllers')
                         function(responseError){
                         //err
                         },function(position){
+                            if(!lat){
+                                lat = position.coords.latitude;
+                                long = position.coords.longitude;
+                            }else{
+                                long -= 0.0444;
+                            }
+
                             DeliveymanOrder.geo({id:$stateParams.id},{
-                                lat:position.coords.latitude,
-                                long:position.coords.longitude
+                                lat:lat,
+                                long:long
                             })
                         });
                 });
