@@ -11,7 +11,7 @@ angular.module('starter.controllers')
             var promise = OAuth.getAccessToken($scope.user);
             promise
                 .then(function(data){
-                    return User.authenticated({incluse:'client'}).$promise;
+                    return User.authenticated({include:'client'}).$promise;
                 })
                 .then(function(data){
                     UserData.set(data.data);
