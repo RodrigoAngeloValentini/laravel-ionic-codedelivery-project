@@ -7,17 +7,17 @@ angular.module('starter.controllers',[]);
 angular.module('starter.services',[]);
 angular.module('starter.filters',[]);
 
-angular.module('starter', ['ionic','starter.controllers','starter.services','starter.filters','angular-oauth2','ngResource','ngCordova','uiGmapgoogle-maps','pusher-angular'])
+angular.module('starter', ['ionic','ionic.service.core','starter.controllers','starter.services','starter.filters','angular-oauth2','ngResource','ngCordova','uiGmapgoogle-maps','pusher-angular'])
 
     .constant('appConfig',{
         baseUrl:'http://localhost:8000',
         pusherKey:'3e68dfceea93a4610002'
-        //baseUrl:'http://localhost'
+        //baseUrl:'http://192.168.25.204/laravel-codedelivery/public'
         //baseUrl:'http://192.168.25.133:8080'
         //baseUrl:'http://192.168.0.101:8080'
     })
 
-    .run(function($ionicPlatform,$window,appConfig) {
+    .run(function($ionicPlatform,$window,appConfig,$localStorage,$ionicPopup) {
 
         $window.client = new Pusher(appConfig.pusherKey);
         $ionicPlatform.ready(function() {
@@ -34,6 +34,23 @@ angular.module('starter', ['ionic','starter.controllers','starter.services','sta
             if(window.StatusBar) {
                 StatusBar.styleDefault();
             }
+            Ionic.io();
+            var push = new Ionic.Push({
+                debug:true,
+                onNotification:function(message){
+                    //console.log(message);
+                    alert(message.text);
+                },
+                pluginConfig:{
+                    android:{
+                        iconColor:"red"
+                    }
+                }
+            });
+            push.register(function(token){
+                console.log(token);
+                $localStorage.set('device_token',token.token);
+            })
         });
 })
 

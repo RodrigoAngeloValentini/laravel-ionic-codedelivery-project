@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "13925e66ec92d73451d076abe3e34f7e",
-    "content-hash": "910d3a1ef3b05001f24f66dbaf1e39dd",
+    "hash": "18817e813bb1bcc78518abbc26693d04",
+    "content-hash": "54c80ee613ef8868176f14f1697433ba",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -252,6 +252,61 @@
             "time": "2015-07-23 00:54:12"
         },
         {
+            "name": "dmitrovskiy/ionic-push-php",
+            "version": "v0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codeedu/ionic-push-php.git",
+                "reference": "11efc0ff18c786ca3e81ce76e20f97174f777e1f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codeedu/ionic-push-php/zipball/11efc0ff18c786ca3e81ce76e20f97174f777e1f",
+                "reference": "11efc0ff18c786ca3e81ce76e20f97174f777e1f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "6.1.*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dmitrovskiy\\IonicPush\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Dmitrovskiy\\IonicPush\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladimir Dmitrovskiy",
+                    "email": "dmitrovskiyvl@gmail.com",
+                    "homepage": "https://github.com/dmitrovskiy",
+                    "role": "Developer"
+                }
+            ],
+            "description": "ionic push notifications php sdk",
+            "homepage": "https://github.com/dmitrovskiy/ionic-push-php",
+            "keywords": [
+                "ionic",
+                "notifications",
+                "push"
+            ],
+            "support": {
+                "source": "https://github.com/codeedu/ionic-push-php/tree/v0.0.3"
+            },
+            "time": "2016-07-01 01:51:01"
+        },
+        {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",
             "source": {
@@ -350,6 +405,184 @@
                 "string"
             ],
             "time": "2016-05-12 17:23:41"
+        },
+        {
+            "name": "guzzlehttp/guzzle",
+            "version": "6.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "c6851d6e48f63b69357cbfa55bca116448140e0c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/c6851d6e48f63b69357cbfa55bca116448140e0c",
+                "reference": "c6851d6e48f63b69357cbfa55bca116448140e0c",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/promises": "~1.0",
+                "guzzlehttp/psr7": "~1.1",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "~4.0",
+                "psr/log": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "6.1-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions_include.php"
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ],
+            "time": "2015-11-23 00:47:50"
+        },
+        {
+            "name": "guzzlehttp/promises",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/promises.git",
+                "reference": "c10d860e2a9595f8883527fa0021c7da9e65f579"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/c10d860e2a9595f8883527fa0021c7da9e65f579",
+                "reference": "c10d860e2a9595f8883527fa0021c7da9e65f579",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Promise\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle promises library",
+            "keywords": [
+                "promise"
+            ],
+            "time": "2016-05-18 16:56:05"
+        },
+        {
+            "name": "guzzlehttp/psr7",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/psr7.git",
+                "reference": "64862e854f876bc5aee2996cab2f552db8586065"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/64862e854f876bc5aee2996cab2f552db8586065",
+                "reference": "64862e854f876bc5aee2996cab2f552db8586065",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "psr/http-message": "~1.0"
+            },
+            "provide": {
+                "psr/http-message-implementation": "1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Psr7\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Tobias Schultze",
+                    "homepage": "https://github.com/Tobion"
+                }
+            ],
+            "description": "PSR-7 message implementation that also provides common utility methods",
+            "keywords": [
+                "http",
+                "message",
+                "request",
+                "response",
+                "stream",
+                "uri",
+                "url"
+            ],
+            "time": "2016-08-03 09:33:34"
         },
         {
             "name": "illuminate/html",
@@ -552,7 +785,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ebdc5d72391a5ab17f3ca90b5410e2322a5976d4",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/afd9c98dc66661b570e26b65b94d60f061a290db",
                 "reference": "555269ee07cfe4e966ad16b394c89fa0b586d8b0",
                 "shasum": ""
             },
@@ -731,7 +964,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/053fc81ec9a2e9d567e90eef9a02d0b1148b52de",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/50e2045ed70a7e75a5e30bc3662904f3b67af8a9",
                 "reference": "b75910a746d1f3ae4b347bd95e86553b4d2e81cc",
                 "shasum": ""
             },
@@ -1327,6 +1560,56 @@
             "time": "2015-09-11 11:26:57"
         },
         {
+            "name": "psr/http-message",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2016-08-06 14:39:51"
+        },
+        {
             "name": "psr/log",
             "version": "dev-master",
             "source": {
@@ -1552,7 +1835,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/61a73eabb2cf16681eda784b8755c587a869ec42",
+                "url": "https://api.github.com/repos/symfony/console/zipball/9b6222e07e9b7c79be8ccce12d208af41950ece4",
                 "reference": "2f02ae81eea3b947a6312a0cd300a791d9ca8f09",
                 "shasum": ""
             },
@@ -1885,7 +2168,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/8ea4e8784404851b18c828e92140eaaab1f61719",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/eb9b8010bb7d319b6e89510128e87835ef2a0df0",
                 "reference": "1ff8149f7d5df3bb42df063c93f8e7218c07a1c9",
                 "shasum": ""
             },
@@ -1941,7 +2224,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/da04980845f18d5dc8c58dd2e818fd6c39d37eb2",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/e2d9b15a82eb62a667af2eab569a6d6374c59aec",
                 "reference": "2a8b7170d4109ce35a8d281bd36a19939d317f8f",
                 "shasum": ""
             },
@@ -2190,7 +2473,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/137fc65c80f094567feb97019ffbb2ab88266a38",
+                "url": "https://api.github.com/repos/symfony/process/zipball/232d69cb2e1c3c6621d9c602541a2eaa04dceaab",
                 "reference": "5a247b254c3afc4359216e9433e77fb3e46f0a17",
                 "shasum": ""
             },
@@ -2239,7 +2522,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/8b64559584e9b580a777b8706863b8815f891bc9",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/c4509a70fdb18d63decd3c24c44734703ed5c7eb",
                 "reference": "c3e52576f877522120a7863b51b676fb3ae575b4",
                 "shasum": ""
             },
@@ -2376,7 +2659,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/b3184011cdc4a2a781b990c69ece4d452c9c8276",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/12545cf051ff70e1b716c66aae9320b95d9244ad",
                 "reference": "121aea605a5db457a179a45eda79e136cde2f66c",
                 "shasum": ""
             },
@@ -2537,7 +2820,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/5265f16ae0ae9b6acaf7c518063d80b2383a8086",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/a1dd85c38f033c895f120e4b346cd737098e7c4a",
                 "reference": "c6533b0a70d2236cf1f7ce21bfaa3cd12e287019",
                 "shasum": ""
             },
@@ -3270,7 +3553,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c062dddcb68e44b563f66ee319ddae2b5a322a90",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5d5239416615e317a9ae693002253b0f5588e389",
                 "reference": "b9cf8c5ff8bc658bebf8e9a5473fc513c38473de",
                 "shasum": ""
             },
@@ -3770,7 +4053,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/f891dd5781923380e069385881728250c929cb4b",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/5b61eed69891b2add260a3741660fa68c38900ae",
                 "reference": "5b6568306892731d18753610f6a207133d982a10",
                 "shasum": ""
             },
@@ -3819,7 +4102,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/3a8e045064f294992a13966b6c892fb9d64853a3",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/0a64afb2cfaf22a36bb4c917849cdee2d008f26a",
                 "reference": "3a8e045064f294992a13966b6c892fb9d64853a3",
                 "shasum": ""
             },

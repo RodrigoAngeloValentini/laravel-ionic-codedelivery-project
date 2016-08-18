@@ -66,10 +66,6 @@ Route::group(['middleware'=>'cors'],function(){
     });
     Route::group(['prefix' => 'api', 'middleware' => 'oauth' , 'as' => 'api.'], function()
     {
-        Route::get('authenticated',function(\CodeDelivery\Repositories\UserRepository $userRepository){
-            $id = Authorizer::getResourceOwnerId();
-            return $userRepository->skipPresenter(false)->find($id);
-        });
         Route::group(['prefix'=>'client',  'middleware'=>'oauth.CheckRole:client','as'=>'client.'],function() {
             Route::resource('order',
                 'Api\Client\ClientCheckoutController',[
@@ -90,6 +86,8 @@ Route::group(['middleware'=>'cors'],function(){
                'as' => 'orders.geo', 'uses' => 'Api\Deliveryman\DeliverymanCheckoutController@geo'
             ]);
         });
+        Route::get('authenticated','Api\UserController@authenticated');
+        Route::patch('device_token','Api\UserController@updateDeviceToken');
         Route::get('cupom/{code}', 'Api\CupomController@show');
     });
 });

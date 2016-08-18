@@ -1,2 +1,17 @@
 php artisan serve --host=192.168.25.133
 ionic emulate --target=emulador
+
+keytool -genkey -v -keystore android-profile.keystore -alias android_profile -keyalg RSA -keysize 2048 -validity 10000
+
+ionic security credentials android --profile android_profile -s android-profile.keystore -p 426622 -k android_profile -w 426622
+
+curl "https://api.ionic.io/push/notifications" -X POST -H "Authorization: Be
+arer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI2ODY1ZjA3ZC0wZDdhLTQ5OGItYjg3ZS0yMWJiNjllMTc4YjkifQ.PeFK44-DTxteDHInHBeFi50kp5L0XBbWSo34mThj0XE" -H "Content-Type: application/json" -d @- << EOF
+{
+"tokens": ["DEV-ffb460e2-05c7-47b3-b0f7-04c81277c7f5"],
+"profile":"android_profile",
+"notification":{"message":"Hello World!!"}
+}
+EOF
+
+

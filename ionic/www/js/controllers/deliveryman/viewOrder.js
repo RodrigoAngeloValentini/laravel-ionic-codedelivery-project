@@ -48,6 +48,20 @@ angular.module('starter.controllers')
                 });
             };
 
+            $scope.efetuarEntrega = function(){
+                DeliveymanOrder.updateStatus({id:$stateParams.id},{status:2},function(){
+                    $ionicPopup.alert({
+                        title:'Advertência',
+                        template:'Status atualizado com sucesso!'
+                    });
+                },function(err){
+                    $ionicPopup.alert({
+                        title:'Advertência',
+                        template:'Erro ao atualizar status'
+                    });
+                });
+            };
+
             function stopWatchPosition(){
                 if(watch && typeof watch=='object' && watch.hasOwnProperty('watchID')){
                     $cordovaGeolocation.clearWatch(watch.watchId);
