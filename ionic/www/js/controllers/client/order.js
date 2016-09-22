@@ -1,8 +1,9 @@
 angular.module('starter.controllers')
     .controller('ClientOrderCtrl',[
         '$scope','$state','$ionicLoading','ClientOrder','$ionicActionSheet',function($scope, $state, $ionicLoading, ClientOrder,$ionicActionSheet){
+            var page = 1;
             $scope.items = [];
-
+            $scope.canMoreItems = true;
             $ionicLoading.show({
                 template:'Carregando...'
             });
@@ -44,9 +45,21 @@ angular.module('starter.controllers')
                 })
             };
 
+            // $scope.loadMore = function(){
+            //     getOrders().then(function(data){
+            //         $scope.items = $scope.items.concat(data.data);
+            //         if($scope.items.length == data.meta.pagination.total){
+            //             $scope.canMoreItems = false;
+            //         }
+            //         page += 1;
+            //         $scope.$broadcast('scroll.infiniteScrollComplete')
+            //     });
+            // };
+
             function getOrders(){
                 return ClientOrder.query({
                     id:null,
+                    page: page,
                     orderBy:'created_at',
                     sortedBy:'desc'
                 }).$promise;

@@ -3,4 +3,8 @@ angular.module('starter.controllers')
         '$scope','$state','$ionicLoading','UserData',function($scope,$state,$ionicLoading,UserData){
             $scope.user = UserData.get();
 
+            $scope.logout = function(){
+                $state.go('logout');
+            }
+
         }]);

@@ -11,10 +11,14 @@ angular.module('starter', ['ionic','ionic.service.core','starter.controllers','s
 
     .constant('appConfig',{
         baseUrl:'http://localhost:8000',
-        pusherKey:'3e68dfceea93a4610002'
+        pusherKey:'3e68dfceea93a4610002',
         //baseUrl:'http://192.168.25.204/laravel-codedelivery/public'
         //baseUrl:'http://192.168.25.133:8080'
         //baseUrl:'http://192.168.0.101:8080'
+        redirectAfterLogin:{
+            client: 'client.order',
+            deliveryman: 'deliveryman.order'
+        }
     })
 
     .run(function($ionicPlatform,$window,appConfig,$localStorage,$ionicPopup) {
@@ -83,6 +87,11 @@ angular.module('starter', ['ionic','ionic.service.core','starter.controllers','s
             url:'/login',
             templateUrl:'templates/login.html',
             controller:'LoginCtrl'
+        })
+        .state('logout',{
+            cache:false,
+            url:'/logout',
+            controller:'LogoutCtrl'
         })
         .state('home',{
             url:'/home',

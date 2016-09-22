@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
     .controller('LoginCtrl',[
-        '$scope','OAuth','OAuthToken','$ionicPopup','$state','$q','UserData','User','$localStorage',function($scope, OAuth,OAuthToken,$ionicPopup,$state,$q,UserData,User,$localStorage){
+        '$scope','OAuth','OAuthToken','$ionicPopup','$state','$q','UserData','User','$localStorage','$redirect',function($scope, OAuth,OAuthToken,$ionicPopup,$state,$q,UserData,User,$localStorage,$redirect){
 
         $scope.user = {
             username:'',
@@ -19,7 +19,7 @@ angular.module('starter.controllers')
                 })
                 .then(function(data){
                     UserData.set(data.data);
-                    $state.go('client.view_products');
+                    $redirect.redirectAfterLogin();
                 },function(responseError){
                     UserData.set(null);
                     OAuthToken.removeToken();
